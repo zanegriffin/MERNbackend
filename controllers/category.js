@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
 //get one by id
 router.get('/:id', async (req, res) => {
-    res.json(await Category.findOneById({_id: req.params.id}))
+    res.json(await Category.findById(req.params.id))
 })
 
 //make a category
@@ -19,12 +19,12 @@ router.post('/', async (req, res) => {
 
 //update a category
 router.put('/:id', async (req, res) => {
-    res.json(await Category.findOneByIdAndUpdate(req.params.id, req.body, {new:true}))
+    res.json(await Category.findByIdAndUpdate(req.params.id, req.body, {new:true}))
 })
 
 //delete a category
 router.delete('/:id', async (req, res) => {
-    res.json(await Category.findOneByIdAndDelete(req.params.id))
+    res.json(await Category.findByIdAndDelete(req.params.id))
 })
 
 module.exports = router
