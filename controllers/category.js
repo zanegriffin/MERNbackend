@@ -4,7 +4,7 @@ const Category = require('../models/category')
 
 //get all
 router.get('/', async (req, res) => {
-    res.json(await Category.find())
+    res.json(await Category.find().populate('foods'))
 })
 
 //get one by name

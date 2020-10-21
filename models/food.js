@@ -8,6 +8,6 @@ const foodSchema = new Schema (
     }
 )
 
-const Food = mongoose.model('Food', foodSchema)
+const Food = mongoose.model('Food', foodSchema, 'Foods')
 
 module.exports = Food

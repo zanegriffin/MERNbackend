@@ -6,7 +6,7 @@ const categorySchema = new Schema (
         name: String,
         img: String,
         amount: String,
-        foods: ['Food']
+        foods: [{type: Schema.Types.ObjectId, ref: 'Food'}]
     }
 )
 
