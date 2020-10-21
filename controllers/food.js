@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const Food = require('../models/food')
+const Category = require('../models/category')
+const { findByIdAndUpdate } = require('../models/category')
 
 //get all
 router.get('/', async (req, res) => {
@@ -13,18 +15,24 @@ router.get('/:name', async (req, res) => {
 })
 
 //make a food
-router.post('/', async (req, res) => {
-    res.json(await Food.create(req.body))
+router.post('/:categoryid', async (req, res) => {
+    let food = await Food.create(req.body)
+    let category = await Category.findByIdAndUpdate(req.params.categoryid, {$push: {foods: food}}, {new:true})
+    res.json({status: 200, category})
 })
 
 //update a food
-router.put('/:id', async (req, res) => {
-    res.json(await Food.findOneByIdAndUpdate(req.params.id, req.body, {new:true}))
+router.put('/:foodid', async (req, res) => {
+    let food = await Food.findByIdAndUpdate(req.params.foodid, req.body, {new:true})
+    res.json({ 
+        status: 200,
+        data: food
+    })
 })
 
 //delete a food
 router.delete('/:id', async (req, res) => {
-    res.json(await Food.findOneByIdAndDelete(req.params.id))
+    res.json(await Food.findByIdAndDelete(req.params.id))
 })
 
 module.exports = router
