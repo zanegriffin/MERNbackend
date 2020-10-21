@@ -12,19 +12,19 @@ router.get('/:name', async (req, res) => {
     res.json(await Food.find({name: req.params.name}))
 })
 
-//make a category
+//make a food
 router.post('/', async (req, res) => {
     res.json(await Food.create(req.body))
 })
 
-//update a category
-router.put('/:name', async (req, res) => {
-    res.json(await Food.findOneAndUpdate({name: req.params.name}, req.body, {new:true}))
+//update a food
+router.put('/:id', async (req, res) => {
+    res.json(await Food.findOneByIdAndUpdate(req.params.id, req.body, {new:true}))
 })
 
-//delete a category
-router.delete('/:name', async (req, res) => {
-    res.json(await Food.findOneAndDelete({name: req.params.name}))
+//delete a food
+router.delete('/:id', async (req, res) => {
+    res.json(await Food.findOneByIdAndDelete(req.params.id))
 })
 
 module.exports = router
