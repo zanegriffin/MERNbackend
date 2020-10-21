@@ -7,9 +7,9 @@ router.get('/', async (req, res) => {
     res.json(await Category.find().populate('foods'))
 })
 
-//get one by name
-router.get('/:name', async (req, res) => {
-    res.json(await Category.find({name: req.params.name}))
+//get one by id
+router.get('/:id', async (req, res) => {
+    res.json(await Category.findOneById(req.params.id))
 })
 
 //make a category
@@ -18,13 +18,13 @@ router.post('/', async (req, res) => {
 })
 
 //update a category
-router.put('/:name', async (req, res) => {
-    res.json(await Category.findOneAndUpdate({name: req.params.name}, req.body, {new:true}))
+router.put('/:id', async (req, res) => {
+    res.json(await Category.findOneByIdAndUpdate(req.params.id, req.body, {new:true}))
 })
 
 //delete a category
-router.delete('/:name', async (req, res) => {
-    res.json(await Category.findOneAndDelete({name: req.params.name}))
+router.delete('/:id', async (req, res) => {
+    res.json(await Category.findOneByIdAndDelete(req.params.id))
 })
 
 module.exports = router
