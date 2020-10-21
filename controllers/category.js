@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
 //get one by id
 router.get('/:id', async (req, res) => {
-    res.json(await Category.findOneById(req.params.id))
+    res.json(await Category.findOneById({_id: req.params.id}))
 })
 
 //make a category
